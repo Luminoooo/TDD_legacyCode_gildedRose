@@ -32,6 +32,25 @@ describe("Gilded Rose", function() {
     items = [ new Item("Sulfuras, Hand of Ragnaros", 0, 80) ];
     update_quality();
     expect(items[0].quality).toEqual(80);
+    expect(items[0].sell_in).toEqual(0);
+  });
+
+  it("'Backstage passes' increases in Quality as it's SellIn value approaches", function() {
+    items = [ new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20) ];
+    for(var i = 0; i < 5; i++){
+      update_quality();
+    }
+    expect(items[0].quality).toEqual(25);
+    for(var i = 0; i < 5; i++){
+      update_quality();
+    }
+    expect(items[0].quality).toEqual(35);
+    for(var i = 0; i < 5; i++){
+      update_quality();
+    }
+    expect(items[0].quality).toEqual(50);
+    update_quality();
+    expect(items[0].quality).toEqual(0);
   });
 
 });
